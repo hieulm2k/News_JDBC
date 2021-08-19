@@ -1,5 +1,7 @@
 package com.harry.news_jdbc.controller.web;
 
+import com.harry.news_jdbc.model.UserModel;
+
 import java.io.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
