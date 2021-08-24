@@ -21,11 +21,6 @@ public class HomeController extends HttpServlet {
     private INewsService newsService;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        NewsModel newsModel = new NewsModel();
-        newsModel.setTitle("bai viet test");
-        newsModel.setContent("Day la bai viet dau tien cua minh!");
-        newsModel.setCategoryId(1L);
-        newsService.save(newsModel);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/web/home.jsp");
         requestDispatcher.forward(request,response);
     }

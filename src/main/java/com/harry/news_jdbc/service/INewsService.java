@@ -7,4 +7,6 @@ import java.util.List;
 public interface INewsService {
     List<NewsModel> findByCategoryId(Long categoryId);
     NewsModel save(NewsModel newsModel);
+    NewsModel update(NewsModel updateNews);
+    void delete(long[] ids);
 }
