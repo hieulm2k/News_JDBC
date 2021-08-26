@@ -3,6 +3,7 @@ package com.harry.news_jdbc.dao.impl;
 import com.harry.news_jdbc.dao.INewsDAO;
 import com.harry.news_jdbc.mapper.NewsMapper;
 import com.harry.news_jdbc.model.NewsModel;
+import com.harry.news_jdbc.paging.Pageble;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class NewsDAO extends AbstractDAO<NewsModel> implements INewsDAO {
     public Long save(NewsModel newsModel) {
         StringBuilder sb = new StringBuilder("Insert into news (title, thumbnail, shortdescription, content, categoryid");
         sb.append(", createddate, createdby) values(?,?,?,?,?,?,?)");
-        return insert(sb.toString(), newsModel.getTitle(), newsModel.getThumbnail(),newsModel.getShortDescription(),
+        return insert(sb.toString(), newsModel.getTitle(), newsModel.getThumbnail(), newsModel.getShortDescription(),
                 newsModel.getContent(), newsModel.getCategoryId(), newsModel.getCreatedDate(), newsModel.getCreatedBy());
     }
 
@@ -41,5 +42,23 @@ public class NewsDAO extends AbstractDAO<NewsModel> implements INewsDAO {
     public void delete(long id) {
         String sql = "Delete from news where id = ?";
         update(sql, id);
+    }
+
+    @Override
+    public List<NewsModel> findAll(Pageble pageble) {
+        StringBuilder sql = new StringBuilder("select * from news");
+        if (pageble.getSorter() != null) {
+            sql.append(" order by " + pageble.getSorter().getSortName() + " " + pageble.getSorter().getSortBy() + "");
+        }
+        if (pageble.getOffset() != null && pageble.getLimit() != null) {
+            sql.append(" limit " + pageble.getOffset() + ", " + pageble.getLimit() + "");
+        }
+        return query(sql.toString(), new NewsMapper());
+    }
+
+    @Override
+    public int getTotalItem() {
+        String sql = "select count(*) from news";
+        return count(sql);
     }
 }

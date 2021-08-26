@@ -10,12 +10,12 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/admin-home"})
 public class HomeController extends HttpServlet {
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/admin/home.jsp");
         requestDispatcher.forward(request,response);
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
     }
 

@@ -2,6 +2,7 @@ package com.harry.news_jdbc.service.impl;
 
 import com.harry.news_jdbc.dao.INewsDAO;
 import com.harry.news_jdbc.model.NewsModel;
+import com.harry.news_jdbc.paging.Pageble;
 import com.harry.news_jdbc.service.INewsService;
 
 import javax.inject.Inject;
@@ -28,6 +29,8 @@ public class NewsService implements INewsService {
     @Override
     public NewsModel update(NewsModel updateNews) {
         NewsModel oldNews = newsDAO.findOne(updateNews.getId());
+        updateNews.setCreatedDate(oldNews.getCreatedDate());
+        updateNews.setCreatedBy(oldNews.getCreatedBy());
         updateNews.setModifiedDate(new Timestamp(System.currentTimeMillis()));
         updateNews.setModifiedBy("");
         newsDAO.update(updateNews);
@@ -39,5 +42,15 @@ public class NewsService implements INewsService {
         for(long id: ids){
             newsDAO.delete(id);
         }
+    }
+
+    @Override
+    public List<NewsModel> findAll(Pageble pageble) {
+        return newsDAO.findAll(pageble);
+    }
+
+    @Override
+    public int getTotalItem() {
+        return newsDAO.getTotalItem();
     }
 }
