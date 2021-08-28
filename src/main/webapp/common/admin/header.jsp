@@ -16,12 +16,11 @@
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        Xin chào, [tên quản trị]
+                        Welcome, ${USERMODEL.fullName}
                     </a>
                 <li class="light-blue dropdown-modal">
-                    <a href='#'>
-                        <i class="ace-icon fa fa-power-off"></i>
-                        Thoát
+                    <a class="nav-link" href='<c:url value="/logout?action=logout"/>'>
+                        Logout
                     </a>
                 </li>
                 </li>

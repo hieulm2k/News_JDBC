@@ -9,6 +9,16 @@
     </listener>
 
     <filter>
+        <filter-name>servletFilter</filter-name>
+        <filter-class>com.harry.news_jdbc.filter.AuthorizationFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>servletFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
         <filter-name>sitemesh</filter-name>
         <filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
     </filter>
